@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Loan Calculator</title>
+
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .input__container {
+        padding: 50px
+      }
+
+      input {
+        border: none;
+        padding: 15px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="input__container">
+        <h1>Loan repayment calculator</h1>
+        <input type="number" id="amount" oninput="calculatePayment()" placeholder="Amount in Naira">
+        <br>
+
+        <input type="number" id="interest" oninput="calculatePayment()" placeholder="Interest(%)">
+        <br>
+        <input type="number" id="years" oninput="calculatePayment()" placeholder="Repayment period(years)">
+        <br>
+        <!-- <button onclick="calculatePayment()">Calculate</button> -->
+        <div class="output">
+          <h3>
+            <span id="monthlyPayment"></span>
+          </h3>
+          <h3>
+            <span id="totalPayment"></span>
+          </h3>
+          <h3>
+            <span id="totalInterest"></span>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculatePayment() {
+
+        // get all the input and output in the document
+        var _amount = document.querySelector('#amount');
+        var _interest = document.querySelector('#interest');
+        var _period = document.querySelector('#years');
+        var _monthlyPayment = document.querySelector('#monthlyPayment');
+        var _totalPayment = document.querySelector('#totalPayment');
+        var _totalInterest = document.querySelector('#totalInterest');
+
+        var _principal = _amount.value;
+        var _rate = _interest.value / 100;
+        var _time = _period.value;
+
+        var _total = _principal * (1 + (_rate * _time));
+        _totalPayment.innerText = "Total Payment: " + "#" + _total.toFixed(2);
+        var _interestPayable = _total - _principal;
+        _totalInterest.innerText = "Total Interest " + "#" + _interestPayable.toFixed(2);
+
+      }
+    </script>
+  </body>
+
+</html>
